@@ -14,9 +14,12 @@
 
 * **Note:** Although the requirements asked for the output to be stored in a dist directory, we were given starter code that already had sample files in the dist directory and wrote the team.html file in an output directory so I kept that directory structure.
 
+* Separately, a string of tests for each class are in the __tests__ directory. The walkthrough video demonstrates that all tests pass.
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Screenshots
 
 ## Built With
 
@@ -65,7 +68,8 @@ It then shows how the application is run and how the input is entered and create
 >node index
 
 and displays the final team.html file.
-
+ 
+[Click here to watch Walkthrough Video](https://watch.screencastify.com/v/GnWDpSZOAfDbLp9Y2Bkf)
 
 ### Repository
 

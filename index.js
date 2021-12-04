@@ -4,7 +4,6 @@ const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
-const chalk = require('chalk');
 
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
@@ -31,6 +30,7 @@ function appMenu() {
 		return 'Please enter a number greater than zero.';
 	}
 
+	// prompts the user to ask for info for a manager
 	function createManager() {
 		console.log('Please build your team');
 		inquirer
@@ -269,7 +269,7 @@ function appMenu() {
 		}
 		fs.writeFileSync(outputPath, render(teamMembers), 'utf-8');
 		//  console.log('%c ' + `Success! Please view your file at ${outputPath}.`, 'color:#FFA500');
-		console.log(chalk.green(`Success! Please view your file at ${outputPath}.`));
+		console.log(`Success! Please view your file at ${outputPath}.`);
 	}
 
 	createManager();

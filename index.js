@@ -14,7 +14,9 @@ const render = require('./src/page-template.js');
 const teamMembers = [];
 const idArray = [];
 
+// appMenu gets the ball rolling. It is called at the end of this file being loaded. Every team needs to have a manager at the minimum, so it asks for input for the manager profile and then calls addTeamMember() to add other kinds of team members
 function appMenu() {
+	// appMenu is built using the currying technique of nesting functions inside a function. All of the file's functions reside within appMenu()
 	function createManager() {
 		console.log('Please build your team');
 		inquirer
@@ -66,12 +68,11 @@ function appMenu() {
 						if (pass) {
 							return true;
 						}
-						return 'Please enter a positive number greater than zero.';
+						return 'Please enter a number greater than zero.';
 					}
 				}
 			])
 			.then((answers) => {
-				// TODO: YOUR CODE HERE
 				// create a manager object from class Manager
 				const manager = new Manager(
 					answers.managerName,
@@ -80,27 +81,26 @@ function appMenu() {
 					answers.managerOfficeNumber
 				);
 
-				// TODO: YOUR CODE HERE
-				// add the manager object to teamMembers
+				// add the manager object to teamMembers array
 				teamMembers.push(manager);
 
-				// TODO: YOUR CODE HERE
 				// add manager id to idArray
-				// we have already checked for duplicates
+				// we have already checked for duplicates when it was input
 				idArray.push(answers.managerId);
 				console.log('idArray: ', idArray);
-				createTeam();
+				// see if the user wants to add a team member
+				addTeamMember();
 			});
 	}
-
-	function createTeam() {
+	// Prompts the user to add additional team members or indicate that it's time to build the team structure
+	function addTeamMember() {
 		inquirer
 			.prompt([
 				{
 					type: 'list',
 					name: 'memberChoice',
 					message: 'Which type of team member would you like to add?',
-					choices: [ 'Engineer', 'Intern', "I don't want to add any more team members" ]
+					choices: [ 'Engineer', 'Intern', 'No more team members. Build my team now.' ]
 				}
 			])
 			.then((userChoice) => {
@@ -112,13 +112,14 @@ function appMenu() {
 						addIntern();
 						break;
 					default:
+						//Done adding members. Generate the HTML code
 						buildTeam();
 				}
 			});
 	}
 
+	// Prompt user to enter info for an Engineer
 	function addEngineer() {
-		// TODO: YOUR CODE HERE
 		// prompt questions to user
 		inquirer
 			.prompt([
@@ -145,7 +146,7 @@ function appMenu() {
 								return 'This ID has already been taken. Please enter another one';
 							} else return true;
 						}
-						return 'Please enter a positive number greater than zero.';
+						return 'Please enter a number greater than zero.';
 					}
 				},
 				{
@@ -173,7 +174,6 @@ function appMenu() {
 				}
 			])
 			.then((answers) => {
-				// TODO: YOUR CODE HERE
 				// create an engineer object from class Engineer
 				const engineer = new Engineer(
 					answers.engineerName,
@@ -182,24 +182,22 @@ function appMenu() {
 					answers.engineerGitHub
 				);
 
-				// TODO: YOUR CODE HERE
 				// add the engineer object to teamMembers
 				teamMembers.push(engineer);
 
-				// TODO: YOUR CODE HERE
 				// add engineer id to idArray
 				// we have already checked for duplicates
 				idArray.push(answers.engineerId);
-				console.log('idArray: ', idArray);
 
-				createTeam();
+				// Ask for any additional team members
+				addTeamMember();
 			});
 	}
 
+	// Prompt user to enter info for an Intern
 	function addIntern() {
 		inquirer
 			.prompt([
-				// TODO: YOUR CODE HERE
 				// prompt questions to user
 				{
 					type: 'input',
@@ -224,7 +222,7 @@ function appMenu() {
 								return 'This ID has already been taken. Please enter another one';
 							} else return true;
 						}
-						return 'Please enter a positive number greater than zero.';
+						return 'Please enter a number greater than zero.';
 					}
 				},
 				{
@@ -252,7 +250,6 @@ function appMenu() {
 				}
 			])
 			.then((answers) => {
-				// TODO: YOUR CODE HERE
 				// create an intern object from class intern
 				const intern = new Intern(
 					answers.internName,
@@ -260,19 +257,18 @@ function appMenu() {
 					answers.internEmail,
 					answers.internSchool
 				);
-				// TODO: YOUR CODE HERE
 				// add the intern object to teamMembers
 				teamMembers.push(intern);
-				// TODO: YOUR CODE HERE
-				// add intern id to idArray
-				// we have already checked for duplicates
-				idArray.push(answers.internId);
-				console.log('idArray: ', idArray);
 
-				createTeam();
+				// add intern id to idArray
+				// we have already checked for duplicates upon input
+				idArray.push(answers.internId);
+
+				// Ask if user wants to add any additional team members
+				addTeamMember();
 			});
 	}
-
+	// all team member info has been entered. Call render
 	function buildTeam() {
 		// Create the output directory if the output path doesn't exist
 		if (!fs.existsSync(OUTPUT_DIR)) {

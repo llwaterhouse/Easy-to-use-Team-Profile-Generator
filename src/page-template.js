@@ -1,12 +1,11 @@
-const Intern = require("../lib/Intern");
+const Intern = require('../lib/Intern');
 
 // create the team
-const generateTeam = team => {
-
-    // create the manager html
-    const generateManager = manager => {
-        console.log("in Generate Manager: ", manager);
-        return `
+const generateTeam = (team) => {
+	// create the manager html
+	const generateManager = (manager) => {
+		console.log('in Generate Manager: ', manager);
+		return `
         <div class="card employee-card">
         <div class="card-header">
             <h2 class="card-title">${manager.getName()}</h2>
@@ -21,12 +20,12 @@ const generateTeam = team => {
         </div>
     </div>
         `;
-    };
+	};
 
-    // create the html for engineers
-    const generateEngineer = engineer => {
-
-        return `
+	// create the html card for an engineer
+	const generateEngineer = (engineer) => {
+		// fill out the template literal with the engineer's specific info and return
+		return `
         <div class="card employee-card">
         <div class="card-header">
             <h2 class="card-title">${engineer.getName()}</h2>
@@ -41,13 +40,12 @@ const generateTeam = team => {
         </div>
     </div>
         `;
-    };
+	};
 
-    // create the html for interns
-    const generateIntern = intern => {
-        // TODO: YOUR CODE HERE
-        // fill out template literal in return
-        return `
+	// create the html card for an intern
+	const generateIntern = (intern) => {
+		// fill out template literal and return
+		return `
         <div class="card employee-card">
         <div class="card-header">
             <h2 class="card-title">${intern.getName()}</h2>
@@ -62,33 +60,27 @@ const generateTeam = team => {
         </div>
     </div>
         `;
-    };
+	};
 
-    const html = [];
+	const html = [];
 
-    html.push(team
-        .filter(employee => employee.getRole() === "Manager")
-        .map(manager => generateManager(manager))
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => generateEngineer(engineer))
-        .join("")
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Intern")
-        .map(intern => generateIntern(intern))
-        .join("")
-    );
+	html.push(team.filter((employee) => employee.getRole() === 'Manager').map((manager) => generateManager(manager)));
+	html.push(
+		team
+			.filter((employee) => employee.getRole() === 'Engineer')
+			.map((engineer) => generateEngineer(engineer))
+			.join('')
+	);
+	html.push(
+		team.filter((employee) => employee.getRole() === 'Intern').map((intern) => generateIntern(intern)).join('')
+	);
 
-    return html.join("");
+	return html.join('');
+};
 
-}
-
-// export function to generate entire page
-module.exports = team => {
-
-    return `
+// export function to generate entire page have the parameter "team" be an array of subclassed Employee objects
+module.exports = (team) => {
+	return `
     <!DOCTYPE html>
 <html lang="en">
 

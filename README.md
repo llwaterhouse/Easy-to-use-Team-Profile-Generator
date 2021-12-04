@@ -21,6 +21,10 @@
 
 ## Screenshots
 
+![Output of passed tests and command line interface](images/passed-tests-and-app-input.PNG)
+
+![HTML output](images/image-of-output-html.PNG )
+
 ## Built With
 
 * HTML
@@ -57,7 +61,7 @@ Then answer the questions at the command line interface.
 
 ## Deliverables
 
-[Sample team.html file that is generated](https://github.com/llwaterhouse/Easy-to-use-Team-Profile-Generator/blob/main/output/team.html)
+[Sample team.html file that is generated](output/team.html)
 
 ### Walkthrough video
 
@@ -82,3 +86,5 @@ Rutgers Coding Bootcamp
 
 ## License
 MIT
+
+[Click here for full license text](LICENSE)

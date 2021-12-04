@@ -1,14 +1,16 @@
 const Manager = require('./lib/Manager');
+const chalk = require("chalk");
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 
+
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
-//
+// When render is passed into the write file command with the array of teamMembers, it creates a string template of the html file including html code to represent each teamMember
 const render = require('./src/page-template.js');
 
 const teamMembers = [];
@@ -50,9 +52,10 @@ function appMenu() {
 					type: 'input',
 					name: 'managerId',
 					message: "What is the team manager's id?",
-					validate: (answer) => {
-						return validateID(answer);
-					}
+					// validate: (answer) => {
+					// 	return validateID(answer);
+//					}
+					validate: validateID
 				},
 				{
 					type: 'input',
@@ -145,9 +148,8 @@ function appMenu() {
 					type: 'input',
 					name: 'engineerId',
 					message: "What is the engineer's id?",
-					validate: (answer) => {
-						return validateID(answer);
-					}
+					validate: validateID,
+					
 				},
 				{
 					type: 'input',
@@ -214,9 +216,8 @@ function appMenu() {
 					type: 'input',
 					name: 'internId',
 					message: "What is the Intern's id?",
-					validate: (answer) => {
-						return validateID(answer);
-					}
+					validate: validateID
+					
 				},
 				{
 					type: 'input',
@@ -269,7 +270,7 @@ function appMenu() {
 		}
 		fs.writeFileSync(outputPath, render(teamMembers), 'utf-8');
 		//  console.log('%c ' + `Success! Please view your file at ${outputPath}.`, 'color:#FFA500');
-		console.log(`Success! Please view your file at ${outputPath}.`);
+		console.log(chalk.green(`Success! Please view your file at ${outputPath}.`));
 	}
 
 	createManager();

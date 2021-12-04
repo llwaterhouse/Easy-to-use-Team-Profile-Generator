@@ -33,12 +33,12 @@
 * node.js
 * inquirer
 * fs
-* chalk
 * path
+* chalk
 
 ## Installation Instructions
 
-If you want to edit application you must have a Github account, downloaded Visual Studio Code, install node.js, and inquirer 
+If you want to edit application you must have a Github account, download Visual Studio Code, install node.js, and inquirer 
 
 [Create a Github account](https://github.com)
 

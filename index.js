@@ -267,7 +267,8 @@ function appMenu() {
 			fs.mkdirSync(OUTPUT_DIR);
 		}
 		fs.writeFileSync(outputPath, render(teamMembers), 'utf-8');
-		console.log('%c ' + `Success! Please view your file at ${outputPath}.`, `color:#FFA500`);
+		// console.log('%c ' + `Success! Please view your file at ${outputPath}.`, `color:#FFA500`);
+		console.log(`Success! Please view your file at ${outputPath}.`);
 	}
 
 	createManager();

@@ -17,6 +17,19 @@ const idArray = [];
 // appMenu gets the ball rolling. It is called at the end of this file being loaded. Every team needs to have a manager at the minimum, so it asks for input for the manager profile and then calls addTeamMember() to add other kinds of team members
 function appMenu() {
 	// appMenu is built using the currying technique of nesting functions inside a function. All of the file's functions reside within appMenu()
+
+	// Checks to see that the ID is a valid number and also that it is unique among team members
+	function validateID(answer) {
+		const pass = answer.match(/^[1-9]\d*$/);
+		if (pass) {
+			// ID's need to be unique.  Check to see if this ID is already taken
+			if (idArray.includes(answer)) {
+				return 'This ID has already been taken. Please enter another one';
+			} else return true;
+		}
+		return 'Please enter a number greater than zero.';
+	}
+
 	function createManager() {
 		console.log('Please build your team');
 		inquirer
@@ -37,14 +50,7 @@ function appMenu() {
 					name: 'managerId',
 					message: "What is the team manager's id?",
 					validate: (answer) => {
-						const pass = answer.match(/^[1-9]\d*$/);
-						if (pass) {
-							// ID's need to be unique.  Check to see if this ID is already taken
-							if (idArray.includes(answer)) {
-								return 'This ID has already been taken. Please enter another one';
-							} else return true;
-						}
-						return 'Please enter a positive number greater than zero.';
+						return validateID(answer);
 					}
 				},
 				{
@@ -87,7 +93,7 @@ function appMenu() {
 				// add manager id to idArray
 				// we have already checked for duplicates when it was input
 				idArray.push(answers.managerId);
-				console.log('idArray: ', idArray);
+
 				// see if the user wants to add a team member
 				addTeamMember();
 			});
@@ -139,14 +145,7 @@ function appMenu() {
 					name: 'engineerId',
 					message: "What is the engineer's id?",
 					validate: (answer) => {
-						const pass = answer.match(/^[1-9]\d*$/);
-						if (pass) {
-							// ID's need to be unique.  Check to see if this ID is already taken
-							if (idArray.includes(answer)) {
-								return 'This ID has already been taken. Please enter another one';
-							} else return true;
-						}
-						return 'Please enter a number greater than zero.';
+						return validateID(answer);
 					}
 				},
 				{
@@ -215,14 +214,7 @@ function appMenu() {
 					name: 'internId',
 					message: "What is the Intern's id?",
 					validate: (answer) => {
-						const pass = answer.match(/^[1-9]\d*$/);
-						if (pass) {
-							// ID's need to be unique.  Check to see if this ID is already taken
-							if (idArray.includes(answer)) {
-								return 'This ID has already been taken. Please enter another one';
-							} else return true;
-						}
-						return 'Please enter a number greater than zero.';
+						return validateID(answer);
 					}
 				},
 				{
@@ -275,6 +267,7 @@ function appMenu() {
 			fs.mkdirSync(OUTPUT_DIR);
 		}
 		fs.writeFileSync(outputPath, render(teamMembers), 'utf-8');
+		console.log('%c ' + `Success! Please view your file at ${outputPath}.`, `color:#FFA500`);
 	}
 
 	createManager();

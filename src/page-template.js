@@ -4,7 +4,6 @@ const Intern = require('../lib/Intern');
 const generateTeam = (team) => {
 	// create the manager html
 	const generateManager = (manager) => {
-		console.log('in Generate Manager: ', manager);
 		return `
         <div class="card employee-card">
         <div class="card-header">
@@ -25,6 +24,7 @@ const generateTeam = (team) => {
 	// create the html card for an engineer
 	const generateEngineer = (engineer) => {
 		// fill out the template literal with the engineer's specific info and return
+
 		return `
         <div class="card employee-card">
         <div class="card-header">
@@ -62,8 +62,10 @@ const generateTeam = (team) => {
         `;
 	};
 
+	// array of cards in html for each team member
 	const html = [];
 
+	//Iterates through the team input array of Employee subclass objects and calls the appropriate function to create the html card from the object.
 	html.push(team.filter((employee) => employee.getRole() === 'Manager').map((manager) => generateManager(manager)));
 	html.push(
 		team
@@ -78,7 +80,7 @@ const generateTeam = (team) => {
 	return html.join('');
 };
 
-// export function to generate entire page have the parameter "team" be an array of subclassed Employee objects
+// export function to generate entire page. The parameter "team" is an array of subclassed Employee objects
 module.exports = (team) => {
 	return `
     <!DOCTYPE html>

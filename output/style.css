@@ -1,6 +1,6 @@
 
 .team-heading {
-    background-color: #c55861;
+    background-color: #A4262C;
     color: #ffffff;
 }
 
@@ -24,6 +24,15 @@
     border: none;
 }
 
+.manager-card{
+    background-color:#4052AB;
+}
+.engineer-card{
+    background-color:#854085;
+}
+.intern-card{
+    background-color:#038387;
+}
 .card-body {
     display: flex;
     flex-direction: column;
